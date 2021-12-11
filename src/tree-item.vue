@@ -147,7 +147,7 @@
                   {'tree-anchor': true},
                   {'tree-disabled': this.model.disabled},
                   {'tree-selected': this.model.selected},
-                  {'tree-determined': this.semiCheck && !this.model.selected && this.isDetermined},
+                  {'tree-selected': this.semiCheck && !this.model.selected && this.isDetermined},
                   {'tree-hovered': this.isHover}
               ]
           },
@@ -218,10 +218,10 @@
           isItemDetermined (item) {
               if (item && item.children && item.children.length) {
                   for (let child of item.children) {
-                      if (child.selected) return true;
+                      if (child.selected){ item.selected = !item.selected; return true;}
                       if (child.children && child.children.length) {
                           let isChildDetermined = this.isItemDetermined(child);
-                          if (isChildDetermined) return true;
+                          if (isChildDetermined) { item.selected = !item.selected; return true;}
                       }
                   }
               }
